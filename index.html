@@ -9,22 +9,61 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- alpinejs -->
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<!-- app -->
+<script src="src/app.js"></script>
+
 </head>
 <body>
 	<!-- Navbar -->
-	<nav class="navbar">
+	<nav class="navbar" id="navbar">
 		<a href="#" class="navbar-logo"> Kenangan<span>senja</span>.</a>
 		<div class="navbar-nav">
 			<a href="#home">Home</a>
 			<a href="#about">Tentang Kami</a>
 			<a href="#menu">Menu</a>
+			<a href="#products">Produk</a>
 			<a href="#contact">Kontak</a> 	
 		</div>
 		
 		<div class="navbar-extra">
-			<a href="#" id="search"><i data-feather="search"></i></a>
-			<a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+			<a href="#" id="search-button"><i data-feather="search"></i></a>
+			<a href="#" id="shopping-cart-button"><i data-feather="shopping-cart"></i></a>
 			<a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+		</div>
+		<!--search form-->
+		<div class="search-form">
+			<input type="search" id="search-box" placeholder="search here..." >
+			<label for="search-box"><i data-feather="search"></i></label>
+		</div>
+
+		<!--shoping cart-->
+		<div class="shopping-cart">
+			<div class="cart-item">
+				<img src="img/products/11.jpg" alt="product1">
+				<div class="item-detail">
+					<h3> Produk 1</h3>
+					<div class="item-price">IDR 30k</div>
+				</div>
+				<i data-feather="trash-2" class="remove-item"></i>
+			</div>
+			<div class="cart-item">
+				<img src="img/products/2.jpg" alt="product1">
+				<div class="item-detail">
+					<h3> Produk 1</h3>
+					<div class="item-price">IDR 30k</div>
+				</div>
+				<i data-feather="trash-2" class="remove-item"></i>
+			</div>
+			<div class="cart-item">
+				<img src="img/products/31.jpg" alt="product1">
+				<div class="item-detail">
+					<h3> Produk 1</h3>
+					<div class="item-price">IDR 30k</div>
+				</div>
+				<i data-feather="trash-2" class="remove-item"></i>
+			</div>
 		</div>
 	</nav>
 
@@ -70,26 +109,71 @@
 
 		<div class="row">
 			<div class="menu-card">
-				<img src="img/menu1.jpg" alt="espresso" class="menu-card-img">
+				<img src="img/products/11.jpg" alt="espresso" class="menu-card-img">
 				<h3 class="menu-card-title">- Espresso -</h3>
 				<p class="menu-card-price">IDR 15K</p>
 			</div>
 			<div class="menu-card">
-				<img src="img/menu1.jpg" alt="espresso" class="menu-card-img">
+				<img src="img/products/2.jpg" alt="espresso" class="menu-card-img">
 				<h3 class="menu-card-title">- Espresso -</h3>
 				<p class="menu-card-price">IDR 15K</p>
 			</div>
 			<div class="menu-card">
-				<img src="img/menu1.jpg" alt="espresso" class="menu-card-img">
+				<img src="img/products/31.jpg" alt="espresso" class="menu-card-img">
 				<h3 class="menu-card-title">- Espresso -</h3>
 				<p class="menu-card-price">IDR 15K</p>
 			</div>
 			<div class="menu-card">
-				<img src="img/menu1.jpg" alt="espresso" class="menu-card-img">
+				<img src="img/products/41.jpg" alt="espresso" class="menu-card-img">
 				<h3 class="menu-card-title">- Espresso -</h3>
 				<p class="menu-card-price">IDR 15K</p>
 			</div>
 
+		</div>
+	</section>
+	
+
+	<!--produk section-->
+	<section class="products" id="products" x-data="products">
+		<h2>Produk <span>Unggulan</span> Kami</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<div class="row">
+			<template x-for="(item, index) in items" x-key="index">
+				<div class="product-card">
+				<div class="product-icon">
+					<a href="#">
+						<svg class="feather">
+						<use href="img/feather-sprite.svg#activity"/>
+						</svg>
+					</a>
+					<a href="#" class="item-detail-button">
+						<svg class="feather">
+							<use href="img/feather-sprite.svg#shopping-cart" />
+						  </svg>
+					</a>
+				</div>
+				<div class="product-image">
+					<img :src="`img/products/${item.img}`" :alt="item.name">
+				</div>
+				<div class="product-content">
+					<h3 x-text="item.name"></h3>
+					<div class="product-stars">
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star"></i>
+					</div>
+					<div class="product-price"><span x-text="item.price"></span></div>
+				</div>
+				</div>
+			</template>
 		</div>
 	</section>
 
@@ -140,12 +224,36 @@
 		</div>
 	</footer>
 
+	<!--modal item detail -->
+	<div class="modal" id="item-detail-modal">
+		<div class="modal-container">
+			<a href="" class="close-icon"><i data-feather="x"></i></a>
+			<div class="modal-content">
+				<img src="img/produk1.jpg" alt="product 1">
+				<div class="product-content">
+					<h3>produk 1</h3>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque omnis dicta eaque impedit rem error laudantium quas nihil, fuga, ab distinctio perferendis sequi. Iusto, necessitatibus!</p>
+					<div class="product-stars">
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star" class="star-full"></i>
+						<i data-feather="star"></i>
+					</div>
+					<div class="product-price">IDR 30K <span>IDR 55K</span></div>
+					<a href="#"><i data-feather="shopping-cart"></i><span>add to cart</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <script>
       feather.replace();
     </script>
 
 
     <!-- my js-->
-    <script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	
 </body>
 </html>
